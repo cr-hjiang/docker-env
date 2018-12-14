@@ -65,7 +65,7 @@ RUN cd /workspace/tmp/ \
     && cd build \
     && cmake .. -DCMAKE_BUILD_TYPE=release \
                 -DCMAKE_INSTALL_PREFIX=/usr/local/ \
-    && make -j3 \
+    && make -j4 \
     && make install \
     && ldconfig
 
@@ -81,7 +81,7 @@ RUN cd /workspace/tmp/ \
     && cd protobuf-3.5.1.1 \
     && ./autogen.sh \
     && ./configure \
-    && make -j3 \
+    && make -j4 \
     && make check \
     && make install \
     && ldconfig
@@ -102,7 +102,7 @@ RUN cd /workspace/tmp/ \
                 -DCMAKE_INSTALL_PREFIX=/usr/local/ \
                 -DBUILD_SHARED_LIBS=true \
                 -DBUILD_STATIC_LIBS=true \
-    && make -j3 \
+    && make -j4 \
     && make install \
     && ldconfig
 
@@ -120,7 +120,7 @@ RUN cd /workspace/tmp/ \
     && cd build \
     && cmake .. -DCMAKE_BUILD_TYPE=release \
                 -DCMAKE_INSTALL_PREFIX=/usr/local/ \
-    && make -j3 \
+    && make -j4 \
     && make install \
     && ldconfig
 
@@ -135,7 +135,7 @@ RUN cd /workspace/tmp/ \
     && unzip glog-0.3.3.zip \
     && cd glog-0.3.3 \
     && ./configure \
-    && make -j3 \
+    && make -j4 \
     && make install \
     && ldconfig
 
