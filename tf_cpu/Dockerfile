@@ -161,6 +161,26 @@ RUN pip install "tensorflow==1.12.0"
 RUN echo "export LC_ALL=C.UTF-8" >> ~/.bashrc
 RUN echo "export LANG=C.UTF-8" >> ~/.bashrc
 
+# Install exVim
+RUN cd /workspace/tmp/ \
+    && git clone https://github.com/exvim/main \
+    && cd main \
+    && sh unix/install.sh \
+    && sh unix/replace-my-vim.sh
+
+RUN apt-get update -y \
+    && apt-get install -y \
+    id-utils \
+    gawk \
+    ctags
+
+# Fix exVim warning from C.UTF-8
+RUN sed -i "45s/.*/        silent exec 'language C.UTF-8'/" ~/.vimrc
+
+# House cleanning
+RUN rm -rf /workspace/tmp/main
+
+# Finished
 CMD ["/bin/bash"]
 
 # To build an image, run:
