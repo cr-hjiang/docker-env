@@ -1,7 +1,7 @@
-FROM ubuntu:16.04
-MAINTAINER Hao Jiang (hao.jiang@corerain.com)
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NOWARNINGS yes
+from ubuntu:16.04
+maintainer hao jiang (hao.jiang@corerain.com)
+env debian_frontend noninteractive
+env debconf_nowarnings yes
 
 # Install necessary packages
 RUN apt-get update -y && apt-get upgrade -y
