@@ -197,4 +197,3 @@ CMD ["/bin/bash"]
 
 # To stop a container, run:
 # docker stop <CONTAINER ID>
-
