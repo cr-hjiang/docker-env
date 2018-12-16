@@ -155,7 +155,6 @@ RUN pip install "scipy>=1.0.0"
 RUN pip install "pydot>=1.2.4"
 RUN pip install "antlr4-python3-runtime==4.5"
 RUN pip install "Cython"
-RUN pip install "tensorflow_gpu==1.12.0"
 
 # Fix plumber docker env.
 RUN echo "export LC_ALL=C.UTF-8" >> ~/.bashrc
@@ -180,6 +179,55 @@ RUN sed -i "45s/.*/        silent exec 'language C.UTF-8'/" ~/.vimrc
 # House cleanning
 RUN rm -rf /workspace/tmp/main
 
+# Install CUDA and CUDNN
+RUN cd /workspace/tmp/ \
+    && wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+RUN cd /workspace/tmp/ \
+    && wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
+RUN cd /workspace/tmp/ \
+    && wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
+RUN cd /workspace/tmp/ \
+    && wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnccl2_2.1.4-1+cuda9.0_amd64.deb
+RUN cd /workspace/tmp/ \
+    && wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
+RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+RUN cd /workspace/tmp/ \
+    && dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb \
+    && dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb \
+    && dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb \
+    && dpkg -i libnccl2_2.1.4-1+cuda9.0_amd64.deb \
+    && dpkg -i libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
+
+RUN cd /workspace/tmp/ \
+    && apt-get -y update \
+    && apt-get install -y \
+    cuda=9.0.176-1 \
+    libcudnn7-dev \
+    libnccl-dev
+
+RUN echo "export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}" >> ~/.bashrc
+RUN echo "export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
+
+# House cleanning
+RUN rm -rf /workspace/tmp/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+RUN rm -rf /workspace/tmp/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
+RUN rm -rf /workspace/tmp/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
+RUN rm -rf /workspace/tmp/libnccl2_2.1.4-1+cuda9.0_amd64.deb
+RUN rm -rf /workspace/tmp/libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
+
+# Install tensorflow_gpu
+RUN cd /workspace/tmp \
+    && wget -O tensorflow_gpu-1.12.0-cp35-cp35m-manylinux1_x86_64.whl \
+    https://files.pythonhosted.org/packages/0a/b2/eea4d2afb868403dbbc0518e0a62814c59517ab2bff20d5d754ba7984b2c/tensorflow_gpu-1.12.0-cp35-cp35m-manylinux1_x86_64.whl
+RUN cd /workspace/tmp \
+    && pip install "tensorflow_gpu-1.12.0-cp35-cp35m-manylinux1_x86_64.whl" \
+    --ignore-installed
+RUN rm /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# House cleanning
+RUN rm -rf /workspace/tmp/tensorflow_gpu-1.12.0-cp35-cp35m-manylinux1_x86_64.whl
+
 # Finished
 CMD ["/bin/bash"]
 
@@ -197,4 +245,3 @@ CMD ["/bin/bash"]
 
 # To stop a container, run:
 # docker stop <CONTAINER ID>
-
