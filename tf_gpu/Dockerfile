@@ -130,18 +130,18 @@ RUN rm -rf /workspace/tmp/eigen-eigen-b3f3d4950030
 
 # Install glog
 RUN cd /workspace/tmp/ \
-    && wget -O glog-0.3.3.zip \
-    https://codeload.github.com/google/glog/zip/v0.3.3 \
-    && unzip glog-0.3.3.zip \
-    && cd glog-0.3.3 \
+    && wget -O glog-0.3.5.zip \
+    https://codeload.github.com/google/glog/zip/v0.3.5 \
+    && unzip glog-0.3.5.zip \
+    && cd glog-0.3.5 \
     && ./configure \
     && make -j4 \
     && make install \
     && ldconfig
 
 # House cleanning
-RUN rm -rf /workspace/tmp/glog-0.3.3.zip
-RUN rm -rf /workspace/tmp/glog-0.3.3
+RUN rm -rf /workspace/tmp/glog-0.3.5.zip
+RUN rm -rf /workspace/tmp/glog-0.3.5
 
 # Pip install
 RUN pip install "opencv-python"
