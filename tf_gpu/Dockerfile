@@ -200,7 +200,7 @@ RUN cd /workspace/tmp/ \
 
 RUN cd /workspace/tmp/ \
     && apt-get -y update \
-    && debian_frontend noninteractive apt-get install -y \
+    && debian_frontend=noninteractive apt-get install -y \
     cuda=9.0.176-1 \
     libcudnn7-dev \
     libnccl-dev
