@@ -147,7 +147,7 @@ RUN echo "-------------------------------------------------------" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "pydot>=1.2.4" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "antlr4-python3-runtime==4.5" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "Cython" \
-    && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "tensorflow-gpu==1.12.0" \
+    && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "tensorflow==1.12.0" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "decorator==4.4.0" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "typing==3.7.4" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "typing_extensions==3.7.4" \
