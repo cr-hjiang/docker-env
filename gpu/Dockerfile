@@ -29,9 +29,6 @@ RUN echo "-------------------------------------------------------" \
     wget \
     net-tools \
     software-properties-common \
-    python3 \
-    python3-dev \
-    python3-pip \
     id-utils \
     gawk \
     ctags \
@@ -134,6 +131,11 @@ RUN echo "-------------------------------------------------------" \
     && rm -rf /workspace/tmp/* \
     && echo "-------------------------------------------------------" \
     && echo "Pip install" \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-dev \
+    python3-pip \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "numpy==1.15.4" \
     && python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple "opencv-python=3.4.0.14" \
