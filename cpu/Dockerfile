@@ -53,7 +53,7 @@ RUN echo "-------------------------------------------------------" \
     && make install \
     && ldconfig \
     && rm -rf /workspace/tmp/* \
-    && echoo "-------------------------------------------------------" \
+    && echo "-------------------------------------------------------" \
     && echo "Install protobuf" \
     && cd /workspace/tmp/ \
     && wget -O protobuf-3.5.1.1.zip \
