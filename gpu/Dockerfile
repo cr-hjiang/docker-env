@@ -57,7 +57,7 @@ RUN echo "-------------------------------------------------------" \
     && ldconfig \
     && rm -rf /workspace/tmp/* \
     && echo "-------------------------------------------------------" \
-    && ehco "Install protobuf" \
+    && echo "Install protobuf" \
     && cd /workspace/tmp/ \
     && wget -O protobuf-3.5.1.1.zip \
     https://codeload.github.com/protocolbuffers/protobuf/zip/3.5.1.1 \
